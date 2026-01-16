@@ -319,4 +319,221 @@ const NODES = {
     text: "Idle screw: 1/8 slag met de klok mee (idle omhoog).",
     hint: "Daarna weer hot laps.",
     logOnEnter: {type:"adjust", text:"Idle +1/8 slag CW (increase)."},
-    butto
+    buttons: [{label:"Hot laps", next:"run_hot_laps", kind:"next"}]
+  },
+
+  run_hot_laps: {
+    type: "action",
+    title: "Stap",
+    text: "Rijd opnieuw hot laps.",
+    hint: "Daarna: controleer of de wielen draaien bij stationair.",
+    buttons: [{label:"Verder", next:"q_wheels_turn_idle", kind:"next"}],
+    logOnEnter: {type:"note", text:"Hot laps opnieuw gereden."}
+  },
+
+  q_wheels_turn_idle: {
+    type: "question",
+    title: "Vraag",
+    text: "Draaien de wielen als hij stationair draait?",
+    yes: "adj_idle_decrease",
+    no: "complete"
+  },
+
+  adj_idle_decrease: {
+    type: "adjust",
+    title: "Aanpassing",
+    text: "Idle screw: 1/8 slag tegen de klok in (idle omlaag).",
+    hint: "Daarna weer hot laps.",
+    logOnEnter: {type:"adjust", text:"Idle -1/8 slag CCW (decrease)."},
+    buttons: [{label:"Hot laps", next:"run_hot_laps", kind:"next"}]
+  },
+
+  complete: {
+    type: "done",
+    title: "Klaar",
+    text: "Tuning is complete ✅",
+    hint: "Als je later weer iets wijzigt (weer, brandstof, uitlaat, etc.), start opnieuw vanaf de 1mm/idle check.",
+    buttons: [{label:"Opnieuw", next:"start", kind:"next"}],
+    logOnEnter: {type:"note", text:"Tuning compleet."}
+  }
+};
+
+const baseAssumptionsText =
+  "• Motor staat op factory specs\n" +
+  "• Motor + chassis zijn warm\n" +
+  "• Alles werkt mechanisch goed\n" +
+  "• Carb start op ~1mm opening\n";
+
+const meaningText =
+  "• Idle omhoog = idle screw CW\n" +
+  "• Low/High richer = CCW\n" +
+  "• Low/High leaner = CW\n" +
+  "• Aanpassingen steeds in 1/8 slag\n";
+
+let state = {
+  current: "start",
+  history: [],
+  log: []
+};
+
+const el = (id)=>document.getElementById(id);
+
+function pushLog(entry){
+  state.log.push({t: new Date().toLocaleString(), ...entry});
+  renderLog();
+  save();
+}
+
+function renderLog(){
+  const ul = el("logList");
+  ul.innerHTML = "";
+  if(state.log.length === 0){
+    const li = document.createElement("li");
+    li.textContent = "Nog geen items. Start de wizard en voeg aanpassingen toe.";
+    ul.appendChild(li);
+    return;
+  }
+  for(const item of [...state.log].reverse()){
+    const li = document.createElement("li");
+    const pill = document.createElement("span");
+    pill.className = "pill " + (item.type === "adjust" ? "adjust" : "note");
+    pill.textContent = item.type === "adjust" ? "AANPASSING" : "NOTITIE";
+    li.appendChild(pill);
+
+    const msg = document.createElement("span");
+    msg.textContent = `${item.text}  (${item.t})`;
+    li.appendChild(msg);
+
+    ul.appendChild(li);
+  }
+}
+
+function setNode(nextId, {fromAnswer=null} = {}){
+  const node = NODES[nextId];
+  if(!node) return;
+
+  // history
+  if(state.current){
+    state.history.push({id: state.current, fromAnswer});
+  }
+  state.current = nextId;
+
+  // log on enter (only once per visit)
+  if(node.logOnEnter){
+    pushLog(node.logOnEnter);
+  } else {
+    save();
+  }
+
+  render();
+}
+
+function back(){
+  if(state.history.length === 0) return;
+  const prev = state.history.pop();
+  state.current = prev.id;
+  save();
+  render();
+}
+
+function restart(){
+  if(!confirm("Opnieuw beginnen? (Log blijft staan)")) return;
+  state.current = "start";
+  state.history = [];
+  save();
+  render();
+}
+
+function render(){
+  const node = NODES[state.current];
+  el("stepTitle").textContent = node.title || "";
+  el("mainText").textContent = node.text || "";
+  el("hint").textContent = node.hint || "";
+
+  // progress
+  el("progress").textContent = `Stap ${Math.max(1, state.history.length + 1)}`;
+
+  // context boxes
+  const showContext = !!node.showContext;
+  el("contextBoxes").style.display = showContext ? "grid" : "none";
+  if(showContext){
+    el("baseAssumptions").textContent = baseAssumptionsText;
+    el("meaning").textContent = meaningText;
+  }
+
+  // answers / buttons
+  const row = el("answerRow");
+  row.innerHTML = "";
+
+  if(node.type === "question"){
+    const yesBtn = document.createElement("button");
+    yesBtn.className = "yes";
+    yesBtn.textContent = "Ja";
+    yesBtn.onclick = ()=> setNode(node.yes, {fromAnswer:"Ja"});
+    row.appendChild(yesBtn);
+
+    const noBtn = document.createElement("button");
+    noBtn.className = "no";
+    noBtn.textContent = "Nee";
+    noBtn.onclick = ()=> setNode(node.no, {fromAnswer:"Nee"});
+    row.appendChild(noBtn);
+  } else if(node.buttons && node.buttons.length){
+    for(const b of node.buttons){
+      const btn = document.createElement("button");
+      btn.className = (b.kind === "next" ? "next" : "ghost");
+      btn.textContent = b.label;
+      btn.onclick = ()=> setNode(b.next, {fromAnswer:b.label});
+      row.appendChild(btn);
+    }
+  } else if(node.next){
+    const btn = document.createElement("button");
+    btn.className = "next";
+    btn.textContent = "Verder";
+    btn.onclick = ()=> setNode(node.next, {fromAnswer:"Verder"});
+    row.appendChild(btn);
+  }
+
+  // back enabled
+  el("backBtn").disabled = state.history.length === 0;
+  el("backBtn").style.opacity = state.history.length === 0 ? 0.5 : 1;
+}
+
+function copyLog(){
+  const lines = [];
+  lines.push("RC Nitro Tuning Log");
+  lines.push("==================");
+  for(const item of state.log){
+    lines.push(`[${item.type.toUpperCase()}] ${item.text} (${item.t})`);
+  }
+  const text = lines.join("\n");
+  navigator.clipboard.writeText(text).then(()=>{
+    alert("Log gekopieerd naar klembord.");
+  }).catch(()=>{
+    prompt("Kopieer handmatig:", text);
+  });
+}
+
+function save(){
+  localStorage.setItem("nitroWizardState", JSON.stringify(state));
+}
+function load(){
+  try{
+    const raw = localStorage.getItem("nitroWizardState");
+    if(!raw) return;
+    const parsed = JSON.parse(raw);
+    if(parsed && parsed.current && NODES[parsed.current]){
+      state = parsed;
+    }
+  }catch(e){}
+}
+
+el("backBtn").addEventListener("click", back);
+el("restartBtn").addEventListener("click", restart);
+el("copyBtn").addEventListener("click", copyLog);
+
+load();
+renderLog();
+render();
+</script>
+</body>
+</html>
