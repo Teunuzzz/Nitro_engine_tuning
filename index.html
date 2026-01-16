@@ -3,15 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-title" content="Nitro Wizard">
   <title>RC Nitro Tuning Wizard</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png">
+  <link rel="icon" href="icons/icon-192.png">
   <meta name="theme-color" content="#0b0c10">
 
   <!-- iOS "Add to Home Screen" -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="theme-color" content="#0b0c10">
 
   <style>
     :root{
@@ -538,11 +540,12 @@ load();
 renderLog();
 render();
 
+window.addEventListener("load", () => {
   if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.register("./sw.js");
-    });
-  }  
+    navigator.serviceWorker.register("./sw.js");
+  }
+});
+
   
 </script>
 </body>
