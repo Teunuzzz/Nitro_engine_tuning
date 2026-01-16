@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>RC Nitro Tuning Wizard</title>
+
+  <!-- iOS "Add to Home Screen" -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#0b0c10">
+
+  <style>
+    :root{
+      --bg:#0b0c10; --card:#141821; --muted:#9aa4b2; --text:#eef2ff;
+      --yes:#2ecc71; --no:#ff6b6b; --accent:#6ea8fe;
+      --border: rgba(255,255,255,.08);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(1200px 700px at 20% -10%, rgba(110,168,254,.18), transparent 60%),
+                  radial-gradient(900px 600px at 90% 10%, rgba(46,204,113,.10), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      padding: max(14px, env(safe-area-inset-top)) 14px max(14px, env(safe-area-inset-bottom));
+    }
+    .wrap{max-width:720px; margin:0 auto;}
+    header{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin:8px 0 14px;}
+    h1{font-size:20px; margin:0; letter-spacing:.2px}
+    .sub{font-size:12px; color:var(--muted); margin-top:4px; line-height:1.35}
+    .badge{font-size:12px; color:#cfe1ff; border:1px solid var(--border); padding:6px 10px; border-radius:999px; white-space:nowrap;}
+    .card{
+      background: rgba(20,24,33,.92);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      backdrop-filter: blur(8px);
+    }
+    .stepTitle{font-size:14px; color:var(--muted); margin:0 0 6px}
+    .mainText{font-size:18px; margin:0 0 10px; line-height:1.35}
+    .hint{font-size:13px; color:var(--muted); margin:10px 0 0; line-height:1.45}
+    .btnRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    button{
+      appearance:none; border:none; border-radius:14px;
+      padding:12px 14px; font-size:16px; font-weight:600;
+      color:#0b0c10; cursor:pointer; flex:1 1 140px;
+      transition: transform .05s ease;
+    }
+    button:active{transform:scale(.98)}
+    .yes{background:var(--yes)}
+    .no{background:var(--no)}
+    .next{background:var(--accent)}
+    .ghost{
+      background: transparent; color: var(--text);
+      border:1px solid var(--border);
+      font-weight:600;
+    }
+    .smallRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+    .smallRow button{padding:10px 12px; font-size:14px; border-radius:12px; flex:1 1 120px;}
+    .log{
+      margin-top:12px;
+      border-top: 1px solid var(--border);
+      padding-top:12px;
+    }
+    .log h2{margin:0 0 8px; font-size:14px; color:var(--muted)}
+    .logList{
+      list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;
+      max-height: 240px; overflow:auto;
+    }
+    .logList li{
+      border:1px solid var(--border); border-radius:12px; padding:10px 12px;
+      background: rgba(255,255,255,.03);
+      font-size:13px; line-height:1.35;
+    }
+    .pill{
+      display:inline-block; font-size:11px; font-weight:700;
+      padding:3px 8px; border-radius:999px; margin-right:8px;
+      border:1px solid var(--border); color:var(--text);
+    }
+    .pill.adjust{background: rgba(110,168,254,.12)}
+    .pill.note{background: rgba(255,255,255,.06)}
+    .footerNote{font-size:12px; color:var(--muted); margin-top:12px; line-height:1.45}
+    .grid2{display:grid; grid-template-columns: 1fr; gap:10px}
+    @media(min-width:640px){ .grid2{grid-template-columns: 1fr 1fr} }
+    .kv{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px;
+      background: rgba(255,255,255,.03);
+    }
+    .kv .k{font-size:12px; color:var(--muted); margin-bottom:6px}
+    .kv .v{font-size:14px; line-height:1.35}
+    a{color:#cfe1ff}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>RC Nitro Tuning Wizard</h1>
+        <div class="sub">
+          Stap-voor-stap flow (ja/nee) op basis van jouw tuning flowchart.<br>
+          Tip: Safari → Deel → <b>‘Zet op beginscherm’</b> voor snel gebruik op iPhone.
+        </div>
+      </div>
+      <div class="badge" id="progress">Stap 1</div>
+    </header>
+
+    <div class="card">
+      <p class="stepTitle" id="stepTitle">Start</p>
+      <p class="mainText" id="mainText">…</p>
+      <div class="grid2" id="contextBoxes" style="display:none;">
+        <div class="kv">
+          <div class="k">Belangrijk (basis)</div>
+          <div class="v" id="baseAssumptions"></div>
+        </div>
+        <div class="kv">
+          <div class="k">Wat beteken(t)en de knoppen?</div>
+          <div class="v" id="meaning"></div>
+        </div>
+      </div>
+
+      <p class="hint" id="hint"> </p>
+
+      <div class="btnRow" id="answerRow"></div>
+
+      <div class="smallRow">
+        <button class="ghost" id="backBtn">Terug</button>
+        <button class="ghost" id="restartBtn">Opnieuw</button>
+        <button class="ghost" id="copyBtn">Kopieer log</button>
+      </div>
+
+      <div class="log">
+        <h2>Log / aanpassingen</h2>
+        <ul class="logList" id="logList"></ul>
+        <div class="footerNote">
+          Let op: temperaturen verschillen per fabrikant; richtlijnen uit het schema: &lt;210° oké, &gt;230° te heet.
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+/**
+ * Wizard gebaseerd op de flowchart:
+ * - Idle met carb 1mm
+ * - Diagnose via ja/nee vragen
+ * - Aanpassingen: idle (CW/CCW 1/8), low-end mix (CW lean / CCW rich 1/8), high-end mix (CW lean / CCW rich 1/8)
+ */
+
+const NODES = {
+  start: {
+    type: "info",
+    title: "Voorwaarden",
+    text: "Dit werkt het best als: motor op fabrieksinstellingen staat, motor & chassis warm zijn, alles technisch in orde is, en de carb (idle opening) start op ~1mm.",
+    hint: "Begin met: carb opening ~1mm via idle screw, daarna motor starten en 1 minuut laten stationair draaien.",
+    showContext: true,
+    next: "set_carb_1mm"
+  },
+
+  set_carb_1mm: {
+    type: "action",
+    title: "Stap",
+    text: "Zet de carb opening op ~1mm met de idle screw.",
+    hint: "Tip: idle neemt toe als je de idle screw met de klok mee draait.",
+    buttons: [{label:"Verder", next:"idle_1min", kind:"next"}],
+    logOnEnter: {type:"note", text:"Carb opening gezet op ~1mm (idle screw)."}
+  },
+
+  idle_1min: {
+    type: "action",
+    title: "Stap",
+    text: "Start de motor en laat ‘m 1 minuut stationair draaien.",
+    hint: "Daarna: beantwoord de vraag hieronder.",
+    buttons: [{label:"Verder", next:"q_idle_1min", kind:"next"}],
+    logOnEnter: {type:"note", text:"Motor gestart, 1 minuut stationair laten draaien."}
+  },
+
+  q_idle_1min: {
+    type: "question",
+    title: "Vraag",
+    text: "Loopt de motor 1 minuut stationair (zonder af te slaan)?",
+    yes: "full_throttle",
+    no: "q_rev_up_before_died"
+  },
+
+  q_rev_up_before_died: {
+    type: "question",
+    title: "Vraag",
+    text: "Ging de motor eerst ‘oplopen’ in toeren vóórdat hij afsloeg?",
+    yes: "adj_low_rich",
+    no: "q_slow_down_and_die"
+  },
+
+  adj_low_rich: {
+    type: "adjust",
+    title: "Aanpassing",
+    text: "Low-end mix: 1/8 slag tegen de klok in (RICHER).",
+    hint: "Daarna opnieuw: start en 1 minuut stationair → test weer.",
+    logOnEnter: {type:"adjust", text:"Low-end mix 1/8 slag CCW (richer)."},
+    buttons: [{label:"Opnieuw testen", next:"idle_1min", kind:"next"}]
+  },
+
+  q_slow_down_and_die: {
+    type: "question",
+    title: "Vraag",
+    text: "Werd hij juist langzamer en sloeg hij toen af?",
+    yes: "adj_low_lean",
+    no: "q_rev_engine_taper"
+  },
+
+  adj_low_lean: {
+    type: "adjust",
+    title: "Aanpassing",
+    text: "Low-end mix: 1/8 slag met de klok mee (LEANER).",
+    hint: "Daarna opnieuw: start en 1 minuut stationair → test weer.",
+    logOnEnter: {type:"adjust", text:"Low-end mix 1/8 slag CW (leaner)."},
+    buttons: [{label:"Opnieuw testen", next:"idle_1min", kind:"next"}]
+  },
+
+  q_rev_engine_taper: {
+    type: "question",
+    title: "Vraag",
+    text: "Geef even gas (rev). Zakt de idle snelheid daarna langzaam terug (taper off)?",
+    yes: "idle_1min", // In de flowchart gaat dit terug richting opnieuw testen
+    no: "full_throttle"
+  },
+
+  full_throttle: {
+    type: "action",
+    title: "Stap",
+    text: "Versnel op vol gas (full throttle).",
+    hint: "Daarna: beoordeel wat er gebeurt.",
+    buttons: [{label:"Verder", next:"q_die_or_lose_power", kind:"next"}],
+    logOnEnter: {type:"note", text:"Full throttle test gedaan."}
+  },
+
+  q_die_or_lose_power: {
+    type: "question",
+    title: "Vraag",
+    text: "Slaat de motor ineens af of verliest hij plots power?",
+    yes: "q_smoke_blue",
+    no: "q_bog_or_die"
+  },
+
+  q_smoke_blue: {
+    type: "question",
+    title: "Vraag",
+    text: "Zie je zichtbare (blauwe) rook?",
+    yes: "adj_high_rich",
+    no: "adj_high_lean"
+  },
+
+  adj_high_rich: {
+    type: "adjust",
+    title: "Aanpassing",
+    text: "High-end mix: 1/8 slag tegen de klok in (RICHER).",
+    hint: "Daarna weer full throttle test.",
+    logOnEnter: {type:"adjust", text:"High-end mix 1/8 slag CCW (richer)."},
+    buttons: [{label:"Opnieuw full throttle", next:"full_throttle", kind:"next"}]
+  },
+
+  adj_high_lean: {
+    type: "adjust",
+    title: "Aanpassing",
+    text: "High-end mix: 1/8 slag met de klok mee (LEANER).",
+    hint: "Daarna weer full throttle test.",
+    logOnEnter: {type:"adjust", text:"High-end mix 1/8 slag CW (leaner)."},
+    buttons: [{label:"Opnieuw full throttle", next:"full_throttle", kind:"next"}]
+  },
+
+  q_bog_or_die: {
+    type: "question",
+    title: "Vraag",
+    text: "Bokt (bog) hij ineens of slaat hij af bij gas geven?",
+    yes: "adj_high_lean",
+    no: "run_hot_laps_temp"
+  },
+
+  run_hot_laps_temp: {
+    type: "action",
+    title: "Stap",
+    text: "Rijd een paar ‘hot laps’ en check de motortemperatuur.",
+    hint: "Daarna: beantwoord de temperatuurvragen.",
+    buttons: [{label:"Verder", next:"q_temp_under_210", kind:"next"}],
+    logOnEnter: {type:"note", text:"Hot laps gereden + temp gecontroleerd."}
+  },
+
+  q_temp_under_210: {
+    type: "question",
+    title: "Vraag",
+    text: "Is de motortemperatuur < 210°?",
+    yes: "full_throttle",     // flowchart gaat terug naar throttle/afstelling loop
+    no: "q_temp_over_230"
+  },
+
+  q_temp_over_230: {
+    type: "question",
+    title: "Vraag",
+    text: "Is de motortemperatuur > 230°?",
+    yes: "adj_high_rich",     // te heet → richer
+    no: "q_brakes_applied_die"
+  },
+
+  q_brakes_applied_die: {
+    type: "question",
+    title: "Vraag",
+    text: "Slaat de motor af als je remt?",
+    yes: "adj_idle_increase",
+    no: "q_wheels_turn_idle"
+  },
+
+  adj_idle_increase: {
+    type: "adjust",
+    title: "Aanpassing",
+    text: "Idle screw: 1/8 slag met de klok mee (idle omhoog).",
+    hint: "Daarna weer hot laps.",
+    logOnEnter: {type:"adjust", text:"Idle +1/8 slag CW (increase)."},
+    butto
