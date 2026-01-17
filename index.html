@@ -25,7 +25,6 @@
       --good:#2ecc71;
       --bad:#ff6b6b;
       --warn:#f7c948;
-
       --radius:18px;
       --shadow: 0 14px 40px rgba(0,0,0,.45);
     }
@@ -40,50 +39,18 @@
         var(--bg);
       padding: max(14px, env(safe-area-inset-top)) 14px max(14px, env(safe-area-inset-bottom));
     }
-    .wrap{max-width:820px; margin:0 auto;}
-    .topbar{
-      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
-      margin:10px 0 14px;
-    }
+    .wrap{max-width:920px; margin:0 auto;}
+    .topbar{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin:10px 0 14px;}
     h1{font-size:20px; margin:0; letter-spacing:.2px}
     .sub{font-size:12px; color:var(--muted); margin-top:4px; line-height:1.35}
-    .pill{
-      border:1px solid var(--border);
-      padding:7px 10px;
-      border-radius:999px;
-      font-size:12px;
-      color:#cfe1ff;
-      white-space:nowrap;
-      background: rgba(255,255,255,.03);
-    }
+    .pill{border:1px solid var(--border); padding:7px 10px; border-radius:999px; font-size:12px; color:#cfe1ff; background: rgba(255,255,255,.03);}
 
-    .tabs{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin: 0 0 12px;
-    }
-    .tab{
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.03);
-      color:var(--text);
-      padding:10px 12px;
-      border-radius: 999px;
-      font-weight:700;
-      font-size:13px;
-      cursor:pointer;
-    }
-    .tab.active{
-      border-color: rgba(110,168,254,.55);
-      background: rgba(110,168,254,.12);
-    }
+    .tabs{display:flex; gap:10px; flex-wrap:wrap; margin: 0 0 12px;}
+    .tab{border:1px solid var(--border); background: rgba(255,255,255,.03); color:var(--text); padding:10px 12px; border-radius: 999px; font-weight:900; font-size:13px; cursor:pointer;}
+    .tab.active{border-color: rgba(110,168,254,.55); background: rgba(110,168,254,.12);}
 
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:12px;
-    }
-    @media(min-width:820px){
-      .grid{ grid-template-columns: 1.1fr .9fr; align-items:start; }
-    }
+    .grid{display:grid; grid-template-columns: 1fr; gap:12px;}
+    @media(min-width:920px){ .grid{ grid-template-columns: 1.25fr .75fr; } }
 
     .card{
       background: var(--card);
@@ -93,137 +60,64 @@
       box-shadow: var(--shadow);
       backdrop-filter: blur(8px);
     }
-    .card h2{
-      margin:0 0 8px;
-      font-size:14px;
-      color:var(--muted);
-      font-weight:800;
-      letter-spacing:.2px;
-    }
-    .headline{
-      margin:0 0 10px;
-      font-size:20px;
-      line-height:1.3;
-      letter-spacing:.2px;
-    }
-    .hint{
-      margin:0;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.45;
-    }
+    .card h2{margin:0 0 8px; font-size:14px; color:var(--muted); font-weight:900; letter-spacing:.2px;}
+    .headline{margin:0 0 10px; font-size:20px; line-height:1.3; letter-spacing:.2px;}
+    .hint{margin:0; color:var(--muted); font-size:13px; line-height:1.45; white-space:pre-line}
 
-    .progressWrap{
-      margin: 10px 0 2px;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-    }
-    .bar{
-      flex:1;
-      height:10px;
+    .choiceCol{display:flex; flex-direction:column; gap:10px; margin-top:12px}
+    .choice{
+      text-align:left;
+      width:100%;
       border:1px solid var(--border);
-      border-radius:999px;
-      overflow:hidden;
+      border-radius:16px;
+      padding:12px 12px;
       background: rgba(255,255,255,.03);
-    }
-    .bar > div{
-      height:100%;
-      width: 0%;
-      background: rgba(110,168,254,.85);
-    }
-    .pct{
-      font-size:12px;
-      color:var(--muted);
-      white-space:nowrap;
-    }
-
-    .btnRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
-    button{
-      appearance:none;
-      border:none;
-      border-radius: 14px;
-      padding:12px 14px;
-      font-size:16px;
-      font-weight:800;
+      color: var(--text);
       cursor:pointer;
-      flex: 1 1 140px;
-      transition: transform .05s ease, opacity .2s ease;
-      color:#0b0c10;
+      font-size:15px;
+      font-weight:900;
     }
-    button:active{transform:scale(.98)}
-    .btnYes{background: var(--good)}
-    .btnNo{background: var(--bad)}
-    .btnNext{background: var(--accent)}
-    .btnGhost{
-      background: transparent;
-      border:1px solid var(--border);
-      color:var(--text);
-      font-weight:800;
-    }
-    .btnWarn{ background: var(--warn); }
-    button:disabled{opacity:.45; cursor:not-allowed}
-
-    .miniRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
-    .miniRow button{padding:10px 12px; font-size:14px; border-radius:12px}
-
-    .list{
-      list-style:none;
-      padding:0; margin:0;
-      display:flex; flex-direction:column; gap:10px;
-      max-height: 360px;
-      overflow:auto;
-    }
-    .item{
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:10px 12px;
-      background: rgba(255,255,255,.03);
-    }
-    .itemTop{
-      display:flex; justify-content:space-between; gap:8px; align-items:flex-start;
-    }
-    .tag{
+    .choice:active{transform:scale(.99)}
+    .choice small{display:block; margin-top:6px; font-size:12px; font-weight:800; color: var(--muted); line-height:1.35}
+    .choice .tag{
       display:inline-block;
       font-size:11px;
-      font-weight:900;
+      font-weight:950;
       padding:4px 9px;
       border-radius:999px;
       border:1px solid var(--border);
       background: rgba(255,255,255,.04);
-      color:var(--text);
-      white-space:nowrap;
+      margin-right:8px;
     }
-    .tag.adjust{ background: rgba(110,168,254,.12); }
-    .tag.note{ background: rgba(255,255,255,.06); }
-    .tag.base{ background: rgba(46,204,113,.10); }
-    .itemMsg{ margin-top:7px; font-size:13px; line-height:1.35; color: var(--text); }
-    .itemMeta{ margin-top:6px; font-size:11px; color: var(--muted); }
+    .tag.safe{ background: rgba(46,204,113,.10); }
+    .tag.warn{ background: rgba(247,201,72,.12); }
+    .tag.advice{ background: rgba(110,168,254,.12); }
+    .tag.stop{ background: rgba(255,107,107,.12); }
 
-    .twoCol{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:10px;
-      margin-top:12px;
+    .miniRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+    button{
+      appearance:none; border:none; border-radius:14px;
+      padding:12px 14px; font-size:15px; font-weight:950;
+      cursor:pointer; flex:1 1 160px;
+      color:#0b0c10;
     }
-    @media(min-width:520px){ .twoCol{ grid-template-columns: 1fr 1fr; } }
+    .btnGhost{background: transparent; border:1px solid var(--border); color: var(--text);}
+    .btnWarn{background: var(--warn);}
+    .btnNext{background: var(--accent);}
 
-    .panel{
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:12px;
-      background: rgba(255,255,255,.03);
-    }
-    .panel h3{
-      margin:0 0 8px;
-      font-size:12px;
-      color:var(--muted);
-      letter-spacing:.2px;
-    }
+    .list{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; max-height:420px; overflow:auto;}
+    .item{border:1px solid var(--border); border-radius:14px; padding:10px 12px; background: rgba(255,255,255,.03);}
+    .itemTop{display:flex; justify-content:space-between; gap:8px; align-items:flex-start;}
+    .pill2{display:inline-block; font-size:11px; font-weight:950; padding:4px 9px; border-radius:999px; border:1px solid var(--border); background: rgba(255,255,255,.04);}
+    .pill2.adjust{background: rgba(110,168,254,.12);}
+    .pill2.note{background: rgba(255,255,255,.06);}
+    .itemMsg{margin-top:7px; font-size:13px; line-height:1.35;}
+    .itemMeta{margin-top:6px; font-size:11px; color: var(--muted);}
 
-    label{font-size:12px; color:var(--muted); font-weight:800; display:block; margin:8px 0 6px}
-    select, input[type="text"]{
-      width:100%;
-      padding:12px 12px;
-      border-radius:12px;
+    /* modal */
+    label{font-size:12px; color:var(--muted); font-weight:950; display:block; margin:8px 0 6px}
+    select,input[type="text"]{
+      width:100%; padding:12px 12px; border-radius:12px;
       border:1px solid var(--border);
       background: rgba(0,0,0,.25);
       color: var(--text);
@@ -231,9 +125,8 @@
       outline:none;
     }
     .rowInline{display:flex; gap:10px}
-    .rowInline > div{flex:1}
-    .smallHelp{font-size:12px; color:var(--muted); margin-top:8px; line-height:1.45}
-    a{color:#cfe1ff}
+    .rowInline>div{flex:1}
+    .smallHelp{font-size:12px; color:var(--muted); margin-top:10px; line-height:1.45}
   </style>
 </head>
 
@@ -243,7 +136,7 @@
     <div>
       <h1>RC Nitro Tuning Wizard</h1>
       <div class="sub">
-        Organische wizard + log + herstel naar originele setting.<br>
+        Test-gedreven tuning • IDLE / LSN / HSN • log + herstel naar baseline.<br>
         iPhone: Safari → Deel → <b>Zet op beginscherm</b>.
       </div>
     </div>
@@ -257,418 +150,353 @@
   </div>
 
   <div class="grid">
-    <!-- LEFT: main -->
     <div class="card" id="mainCard">
-      <h2 id="stepSmallTitle">Stap</h2>
+      <h2 id="stepTitle">Test</h2>
       <div class="headline" id="stepHeadline">…</div>
-
-      <div class="progressWrap">
-        <div class="bar"><div id="barFill"></div></div>
-        <div class="pct" id="barText">0%</div>
-      </div>
-
       <p class="hint" id="stepHint"> </p>
 
-      <div class="btnRow" id="answerRow"></div>
+      <div class="choiceCol" id="choiceCol"></div>
 
       <div class="miniRow">
         <button class="btnGhost" id="btnBack">Terug</button>
         <button class="btnGhost" id="btnRestart">Opnieuw</button>
-        <button class="btnGhost" id="btnQuickLog">+ Log aanpassing</button>
-      </div>
-
-      <div class="twoCol" id="contextBoxes" style="display:none;">
-        <div class="panel">
-          <h3>Basis (goed om te checken)</h3>
-          <div class="hint" id="baseAssumptions"></div>
-        </div>
-        <div class="panel">
-          <h3>Richting</h3>
-          <div class="hint" id="meaning"></div>
-        </div>
+        <button class="btnWarn" id="btnQuickLog">+ Log aanpassing</button>
       </div>
     </div>
 
-    <!-- RIGHT: sidebar -->
     <div class="card" id="sideCard">
       <h2>Laatste log-items</h2>
       <ul class="list" id="logPreview"></ul>
-
       <div class="miniRow">
         <button class="btnGhost" id="btnCopyLog">Kopieer log</button>
-        <button class="btnWarn" id="btnUndoList">Maak herstel-lijst</button>
+        <button class="btnWarn" id="btnUndoList">Herstel-lijst</button>
       </div>
-
       <p class="smallHelp">
-        Tip: druk eerst in <b>Instellingen</b> op “Baseline vastzetten” als je op originele fabriekssettings staat.
+        Baseline: <span id="baselineLabel"></span>
       </p>
     </div>
   </div>
 
-  <!-- MODAL: Quick Log -->
+  <!-- MODAL: Manual log -->
   <div id="modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); padding:18px; z-index:9999;">
-    <div class="card" style="max-width:680px; margin: max(16px, env(safe-area-inset-top)) auto; box-shadow: var(--shadow);">
+    <div class="card" style="max-width:680px; margin: max(16px, env(safe-area-inset-top)) auto;">
       <h2>Log een aanpassing</h2>
       <div class="headline" style="font-size:18px; margin-bottom:6px;">Wat heb je gedraaid?</div>
-      <p class="hint">Kies needle, richting en stapgrootte. De app kan daarna altijd terugrekenen naar je baseline.</p>
+      <p class="hint">Registreer exact (1/16, 1/8, 1/4). Herstel-lijst draait later automatisch terug naar baseline.</p>
 
       <label>Needle</label>
       <select id="logNeedle">
         <option value="IDLE">IDLE screw</option>
-        <option value="LSN">LSN (Low-end)</option>
-        <option value="HSN">HSN (High-end)</option>
+        <option value="LSN">LSN (Low-speed)</option>
+        <option value="HSN">HSN (High-speed)</option>
       </select>
 
       <div class="rowInline">
         <div>
           <label>Richting</label>
           <select id="logDir">
-            <option value="CW">Met de klok mee (CW)</option>
-            <option value="CCW">Tegen de klok in (CCW)</option>
+            <option value="CW">CW (met de klok mee) — leaner / idle omhoog</option>
+            <option value="CCW">CCW (tegen de klok in) — richer / idle omlaag</option>
           </select>
         </div>
         <div>
           <label>Stap</label>
           <select id="logStep">
-            <option value="1/8">1/8 slag</option>
-            <option value="1/4">1/4 slag</option>
             <option value="1/16">1/16 slag</option>
+            <option value="1/8" selected>1/8 slag</option>
+            <option value="1/4">1/4 slag</option>
             <option value="1/2">1/2 slag</option>
           </select>
         </div>
       </div>
 
       <label>Notitie (optioneel)</label>
-      <input type="text" id="logNote" placeholder="bijv. rookte veel, temp 225°, bokte bij gas…" />
+      <input type="text" id="logNote" placeholder="bijv. hang idle, bog bij gas, temp 225°, etc." />
 
-      <div class="btnRow">
+      <div class="miniRow">
         <button class="btnNext" id="logSave">Opslaan</button>
         <button class="btnGhost" id="logCancel">Annuleren</button>
       </div>
-
-      <p class="smallHelp">
-        Richting-hulp: <b>richer = CCW</b>, <b>leaner = CW</b>. Idle omhoog = meestal CW.
-      </p>
     </div>
   </div>
 
-  <!-- MODAL: Undo List -->
+  <!-- MODAL: Undo list -->
   <div id="modalUndo" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); padding:18px; z-index:9999;">
     <div class="card" style="max-width:720px; margin: max(16px, env(safe-area-inset-top)) auto;">
       <h2>Herstel-lijst (terug naar baseline)</h2>
-      <div class="headline" style="font-size:18px; margin-bottom:6px;">Draai deze stappen in deze volgorde</div>
+      <div class="headline" style="font-size:18px; margin-bottom:6px;">Draai deze stappen terug</div>
       <p class="hint" id="undoHint">…</p>
 
       <ul class="list" id="undoList" style="max-height:360px;"></ul>
 
-      <div class="btnRow">
+      <div class="miniRow">
         <button class="btnGhost" id="undoClose">Sluiten</button>
       </div>
-
-      <p class="smallHelp">
-        Dit is een “reverse” van je log sinds de baseline. Als je geen baseline hebt gezet, wordt “begin van log” gebruikt.
-      </p>
     </div>
   </div>
 </div>
 
 <script>
-/* ---------------------------
-   Wizard nodes (same logic)
-----------------------------*/
-const NODES = {
+/* =========================================================
+   TEST-DRIVEN FLOW (IDLE / LSN / HSN)
+   - almost everything is a TEST step
+   - adjustments are output of test (auto-logged)
+   - flowchart path preserved (idle → low → high → temp → idle)
+========================================================= */
+
+const FLOW = {
   start: {
-    type: "info",
-    title: "Start",
-    headline: "We maken dit rustig en logisch.",
-    hint: "Zorg dat je (1) op baseline/factory staat, (2) motor & chassis warm zijn, (3) alles mechanisch oké is, (4) je carb opening ~1mm zet. Daarna gaan we stap voor stap.",
-    showContext: true,
-    next: "set_carb_1mm"
+    title: "Start (setup check)",
+    headline: "Klaar om te testen?",
+    hint:
+      "Voor betrouwbare tests:\n" +
+      "• Motor warm (paar minuutjes rustig rijden)\n" +
+      "• Verse brandstof, goede plug, schoon filter\n" +
+      "• Geen luchtlekken / goede tankdruk\n" +
+      "• Carb opening ~1mm (basis idle)\n\n" +
+      "Aanrader: zet nu een baseline (Instellingen) als je op factory staat.",
+    choices: [
+      { label: "Ik ben klaar → naar IDLE stabiliteit test", next: "idle_stability_60s", tag:"safe" },
+      { label: "Ik wil eerst baseline zetten", next: "jump_settings", tag:"advice" }
+    ]
   },
-  set_carb_1mm: {
-    type: "action",
-    title: "Stap 1",
-    headline: "Zet de carb opening op ~1mm.",
-    hint: "Gebruik de idle screw. (Idle omhoog = meestal CW).",
-    buttons: [{label:"Verder", next:"idle_1min", kind:"next"}],
-    onEnterNote: "Carb opening gezet op ~1mm (idle screw)."
+  jump_settings: { jumpToView: "settings" },
+
+  /* ---------------- IDLE TESTS ---------------- */
+  idle_stability_60s: {
+    title: "IDLE test 1/5",
+    headline: "Stationair 60 seconden: wat doet hij?",
+    hint:
+      "Laat hem stationair staan (zonder gas).\n" +
+      "Let op: stabiel? loopt hij op? zakt hij weg? slaat hij af?",
+    choices: [
+      { label: "Stabiel 60 sec (netjes, voorspelbaar)", sub:"Ga door naar ‘rev return’ test.", next: "idle_rev_return", tag:"safe" },
+      { label: "Loopt op in toeren (‘runs away’) en sterft daarna", sub:"Meestal LSN te lean óf luchtlek. In tuning: eerst LSN richer.", next: "adj_lsn_richer_1_8_from_idle", tag:"warn" },
+      { label: "Zakt weg / verzuipt en sterft", sub:"Meestal LSN te rich. In tuning: LSN iets leaner.", next: "adj_lsn_leaner_1_8_from_idle", tag:"advice" }
+    ]
   },
-  idle_1min: {
-    type: "action",
-    title: "Stap 2",
-    headline: "Start de motor en laat ‘m 1 minuut stationair draaien.",
-    hint: "Daarna beantwoord je de vraag. Als hij afslaat: let op of hij eerst ‘oploopt’ of juist wegzakt.",
-    buttons: [{label:"Verder", next:"q_idle_1min", kind:"next"}],
-    onEnterNote: "Motor gestart, 1 minuut stationair laten draaien."
+
+  idle_rev_return: {
+    title: "IDLE test 2/5",
+    headline: "Korte rev: hoe komt hij terug naar idle?",
+    hint:
+      "Geef 1× een korte rev (even gas) en laat los.\n" +
+      "Kies wat je ziet:",
+    choices: [
+      { label: "Komt snel terug naar normaal idle (geen hangen)", sub:"Mooi. Ga door naar pinch test (LSN-check).", next: "lsn_pinch_test", tag:"safe" },
+      { label: "Blijft hoog hangen (‘hang idle’) en zakt langzaam", sub:"Typisch LSN te lean of luchtlek. Eerst LSN richer.", next: "adj_lsn_richer_1_8_from_idle", tag:"warn" },
+      { label: "Zakt te ver door / bijna uit na rev", sub:"Typisch LSN te rich. Eerst LSN leaner.", next: "adj_lsn_leaner_1_8_from_idle", tag:"advice" }
+    ]
   },
-  q_idle_1min: {
-    type: "question",
-    title: "Check",
-    headline: "Loopt hij 1 minuut stationair (zonder af te slaan)?",
-    hint: "Ja = we testen full throttle. Nee = we kijken wat hij deed vóór het afslaan.",
-    yes: "full_throttle",
-    no: "q_rev_up_before_died"
+
+  /* ---------------- LSN TESTS ---------------- */
+  lsn_pinch_test: {
+    title: "LSN test 1/6",
+    headline: "Pinch test (brandstofslang even dichtknijpen op idle)",
+    hint:
+      "Knijp de brandstofslang dicht terwijl hij stationair draait.\n" +
+      "Wat gebeurt er binnen enkele seconden?",
+    choices: [
+      { label: "Toeren stijgen na ~2–3 sec en dan valt hij uit", sub:"LSN meestal dichtbij goed.", next: "lsn_launch_test", tag:"safe" },
+      { label: "Hij valt vrijwel direct uit (0–1 sec)", sub:"LSN te lean → richer.", next: "adj_lsn_richer_1_8", tag:"warn" },
+      { label: "Hij blijft lang doorlopen (4+ sec) en verandert weinig", sub:"LSN te rich → leaner.", next: "adj_lsn_leaner_1_8", tag:"advice" },
+      { label: "Ik wil deze test overslaan", sub:"Geen probleem. Ga naar wegrijtest.", next: "lsn_launch_test", tag:"advice" }
+    ]
   },
-  q_rev_up_before_died: {
-    type: "question",
-    title: "Check",
-    headline: "Ging hij eerst ‘oplopen’ in toeren vóór hij afsloeg?",
-    hint: "Oplopen → vaak te lean op low-end → richer.",
-    yes: "adj_low_rich",
-    no: "q_slow_down_and_die"
+
+  lsn_launch_test: {
+    title: "LSN test 2/6",
+    headline: "Wegrijtest: van idle naar ~1/4 gas",
+    hint:
+      "Laat hem 10–15 sec idle, geef dan rustig ~1/4 gas en laat hem wegrollen.\n" +
+      "Kies het beste matchende gedrag:",
+    choices: [
+      { label: "Stottert/bokt en valt bijna dood (weinig rook, scherp)", sub:"Te lean op LSN → richer.", next: "adj_lsn_richer_1_8", tag:"warn" },
+      { label: "Gorgelt/verzuipt, veel rook, komt lui op gang", sub:"Te rich op LSN → leaner.", next: "adj_lsn_leaner_1_8", tag:"advice" },
+      { label: "Pakt netjes op, rolt soepel weg, kleine rookpluim", sub:"LSN lijkt goed. Ga naar 1/2 throttle transitie test.", next: "lsn_mid_transition_test", tag:"safe" }
+    ]
   },
-  adj_low_rich: {
-    type: "adjust",
-    title: "Aanpassing",
-    headline: "Low-end: 1/8 slag CCW (RICHER).",
-    hint: "Log dit even (LSN, CCW, 1/8). Daarna opnieuw testen met 1 minuut idle.",
-    adjustPreset: {needle:"LSN", dir:"CCW", step:"1/8", note:"Auto: low-end richer (oplopende idle → lean)."},
-    buttons: [{label:"Opnieuw testen", next:"idle_1min", kind:"next"}]
+
+  lsn_mid_transition_test: {
+    title: "LSN test 3/6",
+    headline: "Transitie: van ~1/4 naar ~1/2 gas",
+    hint:
+      "Rijd rustig weg op 1/4 gas en geef dan door naar ~1/2.\n" +
+      "Let op ‘bog’ (verslikken), rook, en hoe snel hij op toeren komt.",
+    choices: [
+      { label: "Bog/verslikt bij doorhalen, veel rook, dof geluid", sub:"Vaak nog iets te rich op low/mid → LSN iets leaner.", next: "adj_lsn_leaner_1_16", tag:"advice" },
+      { label: "Hapt/schiet scherp maar zakt dan weg, weinig rook", sub:"Vaak te lean op low/mid → LSN iets richer.", next: "adj_lsn_richer_1_16", tag:"warn" },
+      { label: "Trek soepel door richting 1/2 gas, gezonde rook", sub:"Goed. Ga naar hang-idle check na rijden.", next: "lsn_post_run_idle_check", tag:"safe" }
+    ]
   },
-  q_slow_down_and_die: {
-    type: "question",
-    title: "Check",
-    headline: "Werd hij juist langzaam lager in toeren en sloeg hij toen af?",
-    hint: "Wegzakken → vaak te rich op low-end → leaner.",
-    yes: "adj_low_lean",
-    no: "q_rev_engine_taper"
+
+  lsn_post_run_idle_check: {
+    title: "LSN test 4/6",
+    headline: "Na een korte run: hoe is je idle nu?",
+    hint:
+      "Rijd 15–20 sec rustig, stop, laat los naar idle.\n" +
+      "Kies wat je ziet:",
+    choices: [
+      { label: "Idle blijft netjes stabiel", sub:"Mooi. Dan naar HSN (full throttle) tests.", next: "hsn_full_throttle_symptoms", tag:"safe" },
+      { label: "Idle hangt hoog (blijft lang hoog)", sub:"Te lean op LSN óf luchtlek → eerst LSN richer.", next: "adj_lsn_richer_1_16", tag:"warn" },
+      { label: "Idle zakt weg / pruttelt en dreigt uit te vallen", sub:"Te rich op LSN → iets leaner.", next: "adj_lsn_leaner_1_16", tag:"advice" }
+    ]
   },
-  adj_low_lean: {
-    type: "adjust",
-    title: "Aanpassing",
-    headline: "Low-end: 1/8 slag CW (LEANER).",
-    hint: "Log dit even (LSN, CW, 1/8). Daarna opnieuw testen met 1 minuut idle.",
-    adjustPreset: {needle:"LSN", dir:"CW", step:"1/8", note:"Auto: low-end leaner (wegzakkende idle → rich)."},
-    buttons: [{label:"Opnieuw testen", next:"idle_1min", kind:"next"}]
+
+  /* ---------------- HSN TESTS ---------------- */
+  hsn_full_throttle_symptoms: {
+    title: "HSN test 1/6",
+    headline: "Full throttle: kies het symptoom dat je ziet",
+    hint:
+      "Geef vol gas (recht stuk) en kijk/luister:\n" +
+      "• Te lean: weinig rook, scherp/hoog geluid, wordt heet, power zakt weg, kan ineens afslaan.\n" +
+      "• Te rich: veel rook, dof/gorgelend, komt niet lekker op toeren, bogt, mist topsnelheid.\n\n" +
+      "Kies het beste matchende gedrag:",
+    choices: [
+      { label: "Power drop / wil niet doortrekken + weinig rook + ‘scherp’ geluid", sub:"HSN te lean → richer (veiliger).", next: "adj_hsn_richer_1_8", tag:"warn" },
+      { label: "Veel rook + dof/gorgelend + mist topsnelheid", sub:"HSN te rich → iets leaner.", next: "adj_hsn_leaner_1_8", tag:"advice" },
+      { label: "Trekt netjes door met zichtbare rooktrail", sub:"Mooi. Dan naar 5-sec WOT check.", next: "hsn_5sec_wot_check", tag:"safe" }
+    ]
   },
-  q_rev_engine_taper: {
-    type: "question",
-    title: "Check",
-    headline: "Geef even gas. Zakt de idle daarna langzaam terug (taper off)?",
-    hint: "Als je dit ziet, ga terug en check idle opnieuw. Zo niet: door naar full throttle.",
-    yes: "idle_1min",
-    no: "full_throttle"
+
+  hsn_5sec_wot_check: {
+    title: "HSN test 2/6",
+    headline: "5 seconden WOT: blijft hij strak of zakt hij weg?",
+    hint:
+      "Geef 5 sec vol gas. Kijk of hij ‘blijft dragen’ of wegzakt.\n" +
+      "Kies wat je merkt:",
+    choices: [
+      { label: "Blijft dragen, geen wegzakken, rook aanwezig", sub:"Goed. Dan temp check (hot laps).", next: "temp_hot_laps_check", tag:"safe" },
+      { label: "Na 2–5 sec zakt hij weg / houdt in (en rook verdwijnt)", sub:"Vaak te lean/te heet → HSN richer.", next: "adj_hsn_richer_1_8", tag:"warn" },
+      { label: "Na 2–5 sec begint hij te ‘blubberen’ (rijk) en versnelt niet", sub:"Vaak te rich → HSN iets leaner.", next: "adj_hsn_leaner_1_16", tag:"advice" }
+    ]
   },
-  full_throttle: {
-    type: "action",
-    title: "Stap",
-    headline: "Full throttle test.",
-    hint: "Versnel op vol gas. Let op: smoke, power drop, bokken. Daarna beantwoord je de vraag.",
-    buttons: [{label:"Verder", next:"q_die_or_lose_power", kind:"next"}],
-    onEnterNote: "Full throttle test gedaan."
+
+  /* ---------------- TEMP + IDLE WRAP ---------------- */
+  temp_hot_laps_check: {
+    title: "Temp test 1/4",
+    headline: "Hot laps + temperatuur: wat is je situatie?",
+    hint:
+      "Rijd een paar rondjes ‘door’ en check temp.\n" +
+      "Richtlijn: <210° oké, >230° te heet (afhankelijk van meetplek).\n\n" +
+      "Kies wat klopt:",
+    choices: [
+      { label: "Temp <210° en hij rijdt goed", sub:"Ga door naar brake/idle test.", next: "idle_brake_test", tag:"safe" },
+      { label: "Temp >230° of stijgt snel + weinig rook", sub:"Te lean → HSN richer.", next: "adj_hsn_richer_1_8", tag:"warn" },
+      { label: "Temp oké maar hij rookt extreem en voelt lui", sub:"Nog iets te rich → HSN iets leaner.", next: "adj_hsn_leaner_1_16", tag:"advice" }
+    ]
   },
-  q_die_or_lose_power: {
-    type: "question",
-    title: "Check",
-    headline: "Slaat hij ineens af of verliest hij plots power?",
-    hint: "Ja → check rook. Nee → check ‘bog’ bij gas.",
-    yes: "q_smoke_blue",
-    no: "q_bog_or_die"
+
+  idle_brake_test: {
+    title: "IDLE test 3/5",
+    headline: "Remtest: slaat hij af bij remmen / idle load?",
+    hint:
+      "Rijd langzaam, rem af naar stilstand, laat idle.\n" +
+      "Kies wat gebeurt:",
+    choices: [
+      { label: "Slaat af bij remmen / bij stoppen", sub:"Idle vaak te laag → idle iets omhoog.", next: "adj_idle_up_1_8", tag:"advice" },
+      { label: "Blijft lopen", sub:"Mooi. Ga naar ‘wielen draaien’ check.", next: "idle_wheels_turning_check", tag:"safe" }
+    ]
   },
-  q_smoke_blue: {
-    type: "question",
-    title: "Check",
-    headline: "Zie je zichtbare (blauwe) rook?",
-    hint: "Rook aanwezig maar power drop → vaak te rich high-end. Geen rook → vaak te lean.",
-    yes: "adj_high_rich",
-    no: "adj_high_lean"
+
+  idle_wheels_turning_check: {
+    title: "IDLE test 4/5",
+    headline: "Stationair: draaien de wielen mee?",
+    hint:
+      "Zet hem neer, laat idle.\n" +
+      "Kies wat je ziet:",
+    choices: [
+      { label: "Wielen draaien mee", sub:"Idle te hoog → idle iets omlaag.", next: "adj_idle_down_1_8", tag:"advice" },
+      { label: "Wielen staan stil, idle stabiel", sub:"Top. Einde-check.", next: "final_ok", tag:"safe" }
+    ]
   },
-  adj_high_rich: {
-    type: "adjust",
-    title: "Aanpassing",
-    headline: "High-end: 1/8 slag CCW (RICHER).",
-    hint: "Log dit (HSN, CCW, 1/8). Daarna opnieuw full throttle testen.",
-    adjustPreset: {needle:"HSN", dir:"CCW", step:"1/8", note:"Auto: high-end richer (te heet / te lean)."},
-    buttons: [{label:"Opnieuw full throttle", next:"full_throttle", kind:"next"}]
+
+  final_ok: {
+    title: "Einde",
+    headline: "Je tuning ziet er goed uit ✅",
+    hint:
+      "Samenvatting:\n" +
+      "• LSN: goede transitie idle → gas, geen hang idle, pinch ~2–3 sec\n" +
+      "• HSN: rooktrail aanwezig, geen power drop, temp oké\n" +
+      "• IDLE: stopt niet af bij remmen, wielen draaien niet mee\n\n" +
+      "Tip: liever nét iets richer dan te lean (veiliger).",
+    choices: [
+      { label: "Terug naar start", next: "start", tag:"safe" },
+      { label: "Ga naar log & herstel", next: "jump_log", tag:"advice" }
+    ]
   },
-  adj_high_lean: {
-    type: "adjust",
-    title: "Aanpassing",
-    headline: "High-end: 1/8 slag CW (LEANER).",
-    hint: "Log dit (HSN, CW, 1/8). Daarna opnieuw full throttle testen.",
-    adjustPreset: {needle:"HSN", dir:"CW", step:"1/8", note:"Auto: high-end leaner (te rich / power drop met rook)."},
-    buttons: [{label:"Opnieuw full throttle", next:"full_throttle", kind:"next"}]
-  },
-  q_bog_or_die: {
-    type: "question",
-    title: "Check",
-    headline: "Bokt hij ineens (bog) of slaat hij af bij gas geven?",
-    hint: "Bog/afvallen bij gas → vaak te rich high-end → leaner.",
-    yes: "adj_high_lean",
-    no: "run_hot_laps_temp"
-  },
-  run_hot_laps_temp: {
-    type: "action",
-    title: "Stap",
-    headline: "Hot laps + temperatuur-check.",
-    hint: "Rijd een paar rondjes ‘door’ en check temp. Richtlijn: <210° oké, >230° te heet (verschilt per merk).",
-    buttons: [{label:"Verder", next:"q_temp_under_210", kind:"next"}],
-    onEnterNote: "Hot laps gereden + temp gecontroleerd."
-  },
-  q_temp_under_210: {
-    type: "question",
-    title: "Check",
-    headline: "Is de motortemperatuur < 210°?",
-    hint: "Ja → terug naar full throttle loop. Nee → check of hij >230° is.",
-    yes: "full_throttle",
-    no: "q_temp_over_230"
-  },
-  q_temp_over_230: {
-    type: "question",
-    title: "Check",
-    headline: "Is de motortemperatuur > 230°?",
-    hint: "Te heet → richer op high-end.",
-    yes: "adj_high_rich",
-    no: "q_brakes_applied_die"
-  },
-  q_brakes_applied_die: {
-    type: "question",
-    title: "Check",
-    headline: "Slaat hij af als je remt?",
-    hint: "Ja → idle iets omhoog. Nee → check of wielen draaien op idle.",
-    yes: "adj_idle_increase",
-    no: "q_wheels_turn_idle"
-  },
-  adj_idle_increase: {
-    type: "adjust",
-    title: "Aanpassing",
-    headline: "Idle: 1/8 slag CW (idle omhoog).",
-    hint: "Log dit (IDLE, CW, 1/8). Daarna weer hot laps.",
-    adjustPreset: {needle:"IDLE", dir:"CW", step:"1/8", note:"Auto: idle omhoog (slaat af bij remmen)."},
-    buttons: [{label:"Hot laps", next:"run_hot_laps", kind:"next"}]
-  },
-  run_hot_laps: {
-    type: "action",
-    title: "Stap",
-    headline: "Hot laps opnieuw.",
-    hint: "Rijd opnieuw en check stationair gedrag.",
-    buttons: [{label:"Verder", next:"q_wheels_turn_idle", kind:"next"}],
-    onEnterNote: "Hot laps opnieuw gereden."
-  },
-  q_wheels_turn_idle: {
-    type: "question",
-    title: "Check",
-    headline: "Draaien de wielen als hij stationair draait?",
-    hint: "Ja → idle iets omlaag. Nee → tuning compleet.",
-    yes: "adj_idle_decrease",
-    no: "complete"
-  },
-  adj_idle_decrease: {
-    type: "adjust",
-    title: "Aanpassing",
-    headline: "Idle: 1/8 slag CCW (idle omlaag).",
-    hint: "Log dit (IDLE, CCW, 1/8). Daarna weer hot laps.",
-    adjustPreset: {needle:"IDLE", dir:"CCW", step:"1/8", note:"Auto: idle omlaag (wielen draaien op idle)."},
-    buttons: [{label:"Hot laps", next:"run_hot_laps", kind:"next"}]
-  },
-  complete: {
-    type: "done",
-    title: "Klaar",
-    headline: "Tuning is complete ✅",
-    hint: "Verandert weer/brandstof/uitlaat? Zet een nieuwe baseline en doorloop opnieuw.",
-    buttons: [{label:"Opnieuw", next:"start", kind:"next"}],
-    onEnterNote: "Tuning compleet."
-  }
+  jump_log: { jumpToView: "log" },
+
+  /* =======================
+     ADJUSTMENTS (auto logged)
+     - still small, but many tests lead here
+  ======================= */
+  adj_lsn_richer_1_8_from_idle: { adjust:{needle:"LSN", dir:"CCW", step:"1/8", note:"Auto: LSN richer (idle runaway/hang)."}, next:"idle_stability_60s" },
+  adj_lsn_leaner_1_8_from_idle: { adjust:{needle:"LSN", dir:"CW",  step:"1/8", note:"Auto: LSN leaner (idle drowning)."}, next:"idle_stability_60s" },
+
+  adj_lsn_richer_1_8: { adjust:{needle:"LSN", dir:"CCW", step:"1/8", note:"Auto: LSN richer (lean launch/pinch)."}, next:"lsn_launch_test" },
+  adj_lsn_leaner_1_8: { adjust:{needle:"LSN", dir:"CW",  step:"1/8", note:"Auto: LSN leaner (rich launch/pinch)."}, next:"lsn_launch_test" },
+
+  adj_lsn_richer_1_16:{ adjust:{needle:"LSN", dir:"CCW", step:"1/16",note:"Auto: LSN micro richer (fine)."}, next:"lsn_post_run_idle_check" },
+  adj_lsn_leaner_1_16:{ adjust:{needle:"LSN", dir:"CW",  step:"1/16",note:"Auto: LSN micro leaner (fine)."}, next:"lsn_post_run_idle_check" },
+
+  adj_hsn_richer_1_8: { adjust:{needle:"HSN", dir:"CCW", step:"1/8", note:"Auto: HSN richer (lean/heat/power drop)."}, next:"hsn_full_throttle_symptoms" },
+  adj_hsn_leaner_1_8: { adjust:{needle:"HSN", dir:"CW",  step:"1/8", note:"Auto: HSN leaner (too rich at WOT)."}, next:"hsn_full_throttle_symptoms" },
+  adj_hsn_leaner_1_16:{ adjust:{needle:"HSN", dir:"CW",  step:"1/16",note:"Auto: HSN micro leaner (fine)."}, next:"hsn_5sec_wot_check" },
+
+  adj_idle_up_1_8:    { adjust:{needle:"IDLE",dir:"CW",  step:"1/8", note:"Auto: idle omhoog (slaat af bij remmen)."}, next:"idle_brake_test" },
+  adj_idle_down_1_8:  { adjust:{needle:"IDLE",dir:"CCW", step:"1/8", note:"Auto: idle omlaag (wielen draaien)."}, next:"idle_wheels_turning_check" },
 };
 
-const BASE_ASSUMPTIONS =
-  "• Motor op factory/baseline\n" +
-  "• Motor + chassis warm\n" +
-  "• Mechanisch alles oké\n" +
-  "• Carb start ~1mm opening\n";
-
-const MEANING =
-  "• Richer = CCW (tegen de klok in)\n" +
-  "• Leaner = CW (met de klok mee)\n" +
-  "• Idle omhoog = meestal CW\n" +
-  "• Werk in kleine stappen (1/8)\n";
-
-/* ---------------------------
-   State + persistence
-----------------------------*/
-const STORAGE_KEY = "nitroWizardV2";
-
+/* =========================
+   State + storage
+========================= */
+const STORAGE_KEY="nitroWizardV4";
 let state = {
-  view: "wizard",              // wizard | log | settings
-  current: "start",
-  history: [],
-  log: [],                     // entries
-  baselineIndex: 0,            // log index where baseline is set
-  baselineLabel: "Geen baseline gezet",
-  carLabel: "",                // optional: motor/auto notes
+  view:"wizard",
+  node:"start",
+  history:[],
+  log:[],
+  baselineIndex:0,
+  baselineLabel:"Geen baseline gezet",
+  carLabel:""
 };
 
-const $ = (id)=>document.getElementById(id);
-
-function nowStr(){
-  return new Date().toLocaleString();
-}
-
-function save(){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-}
+const $=(id)=>document.getElementById(id);
+function nowStr(){ return new Date().toLocaleString(); }
+function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
 function load(){
   try{
     const raw = localStorage.getItem(STORAGE_KEY);
     if(!raw) return;
     const parsed = JSON.parse(raw);
-    if(parsed && parsed.current && NODES[parsed.current]){
-      state = parsed;
-    }
+    if(parsed && parsed.node && FLOW[parsed.node]) state = parsed;
   }catch(e){}
 }
 
-/* ---------------------------
-   Log model: adjustment math
-----------------------------*/
-function stepToNum(step){
-  // supports "1/16", "1/8", "1/4", "1/2"
-  const [a,b] = step.split("/").map(Number);
-  if(!a || !b) return 0;
-  return a / b;
-}
-function numToPretty(n){
-  // show as simplest common fraction if possible (up to 1/16 resolution)
-  const denom = 16;
-  const x = Math.round(n * denom);
-  if(x === 0) return "0";
-  // reduce fraction
-  let a = x, b = denom;
-  const g = gcd(a,b);
-  a/=g; b/=g;
-  if(b===1) return `${a}`;
-  return `${a}/${b}`;
-}
+function stepToNum(step){ const [a,b]=step.split("/").map(Number); return (!a||!b)?0:(a/b); }
 function gcd(a,b){ while(b){ [a,b]=[b,a%b]; } return a; }
+function numToPretty(n){
+  const denom=16;
+  const x=Math.round(n*denom);
+  if(x===0) return "0";
+  let a=x, b=denom;
+  const g=gcd(a,b); a/=g; b/=g;
+  return b===1 ? `${a}` : `${a}/${b}`;
+}
+function fmt(v){
+  const sign=v>0?"+":v<0?"-":"";
+  return `${sign}${numToPretty(Math.abs(v))} slag`;
+}
 
 function addLog(entry){
-  state.log.push({ id: cryptoRandomId(), t: nowStr(), ...entry });
+  state.log.push({ id: Math.random().toString(16).slice(2), t: nowStr(), ...entry });
   save();
-  renderAll();
 }
-function cryptoRandomId(){
-  // small id for stable keys
-  return Math.random().toString(16).slice(2) + Math.random().toString(16).slice(2);
+function logAdjustment(needle, dir, step, note, source="auto"){
+  const delta = stepToNum(step) * (dir==="CW" ? 1 : -1);
+  addLog({ type:"adjust", needle, dir, step, delta, note: note||"", source });
 }
-
-function logAdjustment(needle, dir, step, note, source="manual"){
-  // Define positive direction as CW for all needles. (You can change later if you want.)
-  const delta = stepToNum(step) * (dir === "CW" ? 1 : -1);
-  addLog({
-    type: "adjust",
-    needle,
-    dir,
-    step,
-    delta,        // numeric turns (+CW / -CCW)
-    note: note || "",
-    source
-  });
-}
-
-function logNote(text){
-  addLog({ type:"note", text });
-}
-
 function setBaseline(){
   state.baselineIndex = state.log.length;
   state.baselineLabel = `Baseline gezet (${nowStr()})`;
@@ -676,167 +504,169 @@ function setBaseline(){
   renderAll();
 }
 
-function clearAll(confirmFirst=true){
-  if(confirmFirst && !confirm("Alles wissen? (wizard + log + baseline)")) return;
-  state.current = "start";
-  state.history = [];
-  state.log = [];
-  state.baselineIndex = 0;
-  state.baselineLabel = "Geen baseline gezet";
-  state.carLabel = "";
+function computeNetSinceBaseline(){
+  const sum={IDLE:0,LSN:0,HSN:0};
+  state.log.slice(state.baselineIndex).forEach(it=>{
+    if(it.type!=="adjust") return;
+    if(sum[it.needle]===undefined) return;
+    sum[it.needle]+=it.delta;
+  });
+  return sum;
+}
+
+function copyLog(){
+  const lines=[];
+  lines.push("RC Nitro Tuning Log");
+  lines.push("==================");
+  lines.push(`Baseline: ${state.baselineLabel}`);
+  if(state.carLabel) lines.push(`Notitie: ${state.carLabel}`);
+  lines.push("");
+  state.log.forEach(it=>{
+    if(it.type==="adjust"){
+      lines.push(`[AANPASSING] ${it.needle} ${it.dir} ${it.step}${it.note?` — ${it.note}`:""} (${it.t})`);
+    } else {
+      lines.push(`[NOTITIE] ${it.text} (${it.t})`);
+    }
+  });
+  const sum=computeNetSinceBaseline();
+  lines.push("");
+  lines.push(`Netto sinds baseline (+=CW, -=CCW): IDLE ${fmt(sum.IDLE)}, LSN ${fmt(sum.LSN)}, HSN ${fmt(sum.HSN)}`);
+  const text=lines.join("\n");
+  navigator.clipboard.writeText(text).then(()=>alert("Log gekopieerd.")).catch(()=>prompt("Kopieer handmatig:", text));
+}
+
+function openUndoList(){
+  const slice = state.log.slice(state.baselineIndex).filter(x=>x.type==="adjust");
+  $("undoList").innerHTML="";
+  if(slice.length===0){
+    $("undoHint").textContent="Geen aanpassingen sinds baseline. Je staat volgens het log op origineel.";
+  } else {
+    $("undoHint").textContent="Draai onderstaande stappen terug (in deze volgorde) om terug te gaan naar baseline.";
+    slice.slice().reverse().forEach(it=>{
+      const oppositeDir = it.dir==="CW" ? "CCW" : "CW";
+      const li=document.createElement("li");
+      li.className="item";
+      li.innerHTML=`
+        <div class="itemTop">
+          <div><span class="pill2 adjust">TERUGDRAAIEN</span></div>
+          <div class="itemMeta">Was: ${it.needle} ${it.dir} ${it.step}</div>
+        </div>
+        <div class="itemMsg"><b>${it.needle}</b> ${oppositeDir} ${it.step}${it.note?` — ${escapeHtml(it.note)}`:""}</div>
+      `;
+      $("undoList").appendChild(li);
+    });
+  }
+  $("modalUndo").style.display="block";
+}
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[c]));
+}
+
+/* =========================
+   Navigation
+========================= */
+function go(nodeId, from=null){
+  const node = FLOW[nodeId];
+  if(!node) return;
+
+  if(node.jumpToView){
+    state.view = node.jumpToView;
+    save();
+    renderAll();
+    return;
+  }
+
+  state.history.push({ node: state.node, from });
+  state.node = nodeId;
+
+  // auto adjustment nodes
+  if(node.adjust){
+    logAdjustment(node.adjust.needle, node.adjust.dir, node.adjust.step, node.adjust.note, "auto");
+    // immediately continue to next test step
+    const next = node.next;
+    save();
+    state.node = next;
+  }
+
   save();
   renderAll();
 }
 
-/* ---------------------------
-   Wizard navigation
-----------------------------*/
-function setNode(nextId, fromAnswer=null){
-  const node = NODES[nextId];
-  if(!node) return;
-
-  if(state.current){
-    state.history.push({ id: state.current, fromAnswer });
-  }
-  state.current = nextId;
-
-  // Organic: auto-note on enter
-  if(node.onEnterNote){
-    logNote(node.onEnterNote);
-  }
-
-  // Organic: if node suggests an adjust preset, offer quick log
-  renderAll();
-}
-
 function back(){
-  if(state.history.length === 0) return;
-  const prev = state.history.pop();
-  state.current = prev.id;
+  if(state.history.length===0) return;
+  const prev=state.history.pop();
+  state.node=prev.node;
   save();
   renderAll();
 }
 
 function restartWizard(){
-  if(!confirm("Wizard opnieuw beginnen? (Log blijft staan)")) return;
-  state.current = "start";
-  state.history = [];
+  if(!confirm("Wizard opnieuw? (Log blijft staan)")) return;
+  state.node="start";
+  state.history=[];
   save();
   renderAll();
 }
 
-/* ---------------------------
-   UI: tabs + rendering
-----------------------------*/
+/* =========================
+   Views + render
+========================= */
 function setView(v){
-  state.view = v;
+  state.view=v;
   save();
   renderAll();
 }
 
 function renderTabs(){
-  const tabs = [
-    {id:"tabWizard", v:"wizard"},
-    {id:"tabLog", v:"log"},
-    {id:"tabSettings", v:"settings"},
-  ];
-  tabs.forEach(t=>{
-    const el = $(t.id);
-    el.classList.toggle("active", state.view === t.v);
-  });
-  $("statusPill").textContent =
-    state.view === "wizard" ? "Wizard" :
-    state.view === "log" ? "Log & herstel" : "Instellingen";
+  $("tabWizard").classList.toggle("active", state.view==="wizard");
+  $("tabLog").classList.toggle("active", state.view==="log");
+  $("tabSettings").classList.toggle("active", state.view==="settings");
+  $("statusPill").textContent = state.view==="wizard" ? "Wizard" : state.view==="log" ? "Log & herstel" : "Instellingen";
+  $("baselineLabel").textContent = state.baselineLabel;
 }
 
 function renderWizard(){
-  const node = NODES[state.current];
-
-  $("stepSmallTitle").textContent = node.title || "Stap";
+  const node = FLOW[state.node];
+  $("stepTitle").textContent = node.title || "Test";
   $("stepHeadline").textContent = node.headline || "";
   $("stepHint").textContent = node.hint || "";
 
-  // progress: based on history length with soft cap
-  const totalGuess = 12; // not exact, but gives organic feeling
-  const p = Math.min(1, (state.history.length+1)/totalGuess);
-  $("barFill").style.width = Math.round(p*100) + "%";
-  $("barText").textContent = Math.round(p*100) + "%";
+  const col=$("choiceCol");
+  col.innerHTML="";
 
-  // context
-  const showContext = !!node.showContext;
-  $("contextBoxes").style.display = showContext ? "grid" : "none";
-  if(showContext){
-    $("baseAssumptions").textContent = BASE_ASSUMPTIONS;
-    $("meaning").textContent = MEANING;
-  }
+  (node.choices||[]).forEach(ch=>{
+    const btn=document.createElement("button");
+    btn.className="choice";
+    const t = ch.tag==="safe" ? "GOED" : ch.tag==="warn" ? "LET OP" : ch.tag==="stop" ? "STOP" : "ADVIES";
+    const cls = ch.tag || "advice";
+    btn.innerHTML = `<span class="tag ${cls}">${t}</span>${escapeHtml(ch.label)}${ch.sub?`<small>${escapeHtml(ch.sub)}</small>`:""}`;
+    btn.onclick = ()=> go(ch.next, ch.label);
+    col.appendChild(btn);
+  });
 
-  // answers
-  const row = $("answerRow");
-  row.innerHTML = "";
-
-  if(node.type === "question"){
-    const yes = document.createElement("button");
-    yes.className = "btnYes";
-    yes.textContent = "Ja";
-    yes.onclick = ()=> setNode(node.yes, "Ja");
-    row.appendChild(yes);
-
-    const no = document.createElement("button");
-    no.className = "btnNo";
-    no.textContent = "Nee";
-    no.onclick = ()=> setNode(node.no, "Nee");
-    row.appendChild(no);
-  } else if(node.buttons && node.buttons.length){
-    node.buttons.forEach(b=>{
-      const btn = document.createElement("button");
-      btn.className = b.kind === "next" ? "btnNext" : "btnGhost";
-      btn.textContent = b.label;
-      btn.onclick = ()=> setNode(b.next, b.label);
-      row.appendChild(btn);
-    });
-  } else if(node.next){
-    const btn = document.createElement("button");
-    btn.className = "btnNext";
-    btn.textContent = "Verder";
-    btn.onclick = ()=> setNode(node.next, "Verder");
-    row.appendChild(btn);
-  }
-
-  // Organic: if node is adjust, show extra "Log deze stap" button
-  if(node.type === "adjust" && node.adjustPreset){
-    const btn = document.createElement("button");
-    btn.className = "btnWarn";
-    btn.textContent = "Log deze aanpassing (aanrader)";
-    btn.onclick = ()=>{
-      openQuickLog(node.adjustPreset);
-    };
-    row.appendChild(btn);
-  }
-
-  $("btnBack").disabled = state.history.length === 0;
+  $("btnBack").disabled = state.history.length===0;
 }
 
 function renderLogPreview(){
-  const ul = $("logPreview");
-  ul.innerHTML = "";
-  const items = state.log.slice(-6).reverse();
-
-  if(items.length === 0){
-    const li = document.createElement("li");
-    li.className = "item";
-    li.innerHTML = `<div class="itemMsg">Nog geen log-items. Gebruik “+ Log aanpassing” of laat de wizard notities toevoegen.</div>`;
+  const ul=$("logPreview");
+  ul.innerHTML="";
+  const items = state.log.slice(-8).reverse();
+  if(items.length===0){
+    const li=document.createElement("li");
+    li.className="item";
+    li.innerHTML=`<div class="itemMsg">Nog geen log-items. Gebruik “+ Log aanpassing”.</div>`;
     ul.appendChild(li);
     return;
   }
-
   items.forEach(it=>{
-    const li = document.createElement("li");
-    li.className = "item";
-    const tag = it.type === "adjust" ? `<span class="tag adjust">AANPASSING</span>` : `<span class="tag note">NOTITIE</span>`;
-    const msg = it.type === "adjust"
-      ? `<b>${it.needle}</b> ${it.dir} ${it.step}${it.note ? ` — ${escapeHtml(it.note)}`:""}`
-      : `${escapeHtml(it.text || "")}`;
-    li.innerHTML = `
+    const li=document.createElement("li");
+    li.className="item";
+    const tag = it.type==="adjust" ? `<span class="pill2 adjust">AANPASSING</span>` : `<span class="pill2 note">NOTITIE</span>`;
+    const msg = it.type==="adjust"
+      ? `<b>${it.needle}</b> ${it.dir} ${it.step}${it.note?` — ${escapeHtml(it.note)}`:""}`
+      : escapeHtml(it.text||"");
+    li.innerHTML=`
       <div class="itemTop">
         <div>${tag}</div>
         <div class="itemMeta">${escapeHtml(it.t)}</div>
@@ -847,75 +677,65 @@ function renderLogPreview(){
   });
 }
 
-function renderMainCardByView(){
-  const main = $("mainCard");
-  const side = $("sideCard");
-
-  if(state.view === "wizard"){
-    main.style.display = "";
-    side.style.display = "";
-    renderWizard();
-    renderLogPreview();
-  }
-
-  if(state.view === "log"){
-    main.style.display = "";
-    side.style.display = "none";
-    renderLogFull();
-  }
-
-  if(state.view === "settings"){
-    main.style.display = "";
-    side.style.display = "none";
-    renderSettings();
-  }
-}
-
-function renderLogFull(){
-  // reuse main card layout to show full log + restore summary
-  $("stepSmallTitle").textContent = "Log & herstel";
-  $("stepHeadline").textContent = "Alles wat je hebt gedaan — en hoe je teruggaat.";
+function renderLogView(){
+  const sum=computeNetSinceBaseline();
+  $("stepTitle").textContent="Log & herstel";
+  $("stepHeadline").textContent="Alles wat je deed — en hoe je teruggaat.";
   $("stepHint").textContent =
-    `Baseline: ${state.baselineLabel}. Alles na de baseline telt mee voor herstel naar origineel.`;
+    `Baseline: ${state.baselineLabel}\n` +
+    `Netto sinds baseline (+=CW, -=CCW): IDLE ${fmt(sum.IDLE)}, LSN ${fmt(sum.LSN)}, HSN ${fmt(sum.HSN)}`;
 
-  // progress bar off
-  $("barFill").style.width = "100%";
-  $("barText").textContent = "Log";
+  const col=$("choiceCol");
+  col.innerHTML="";
 
-  $("contextBoxes").style.display = "none";
+  const b1=document.createElement("button");
+  b1.className="choice";
+  b1.innerHTML=`<span class="tag advice">ACTIE</span> + Log aanpassing`;
+  b1.onclick=()=>openQuickLog();
+  col.appendChild(b1);
 
-  const row = $("answerRow");
-  row.innerHTML = "";
+  const b2=document.createElement("button");
+  b2.className="choice";
+  b2.innerHTML=`<span class="tag warn">ACTIE</span> Herstel-lijst (terug naar baseline)`;
+  b2.onclick=openUndoList;
+  col.appendChild(b2);
 
-  const wrap = document.createElement("div");
-  wrap.className = "panel";
-  wrap.innerHTML = `
-    <h3>Overzicht sinds baseline</h3>
-    <div class="hint" id="restoreSummaryText"></div>
-  `;
-  row.appendChild(wrap);
+  const b3=document.createElement("button");
+  b3.className="choice";
+  b3.innerHTML=`<span class="tag safe">ACTIE</span> Baseline vastzetten`;
+  b3.onclick=setBaseline;
+  col.appendChild(b3);
 
-  const ul = document.createElement("ul");
-  ul.className = "list";
-  ul.style.maxHeight = "360px";
-  ul.style.marginTop = "12px";
-  row.appendChild(ul);
+  const b4=document.createElement("button");
+  b4.className="choice";
+  b4.innerHTML=`<span class="tag advice">ACTIE</span> Kopieer log`;
+  b4.onclick=copyLog;
+  col.appendChild(b4);
 
-  const all = state.log;
-  if(all.length === 0){
-    const li = document.createElement("li");
-    li.className = "item";
-    li.innerHTML = `<div class="itemMsg">Nog geen log-items.</div>`;
+  const listTitle=document.createElement("div");
+  listTitle.style.marginTop="12px";
+  listTitle.innerHTML=`<h2 style="margin:14px 0 8px; font-size:14px; color:var(--muted); font-weight:900;">Volledige log</h2>`;
+  col.appendChild(listTitle);
+
+  const ul=document.createElement("ul");
+  ul.className="list";
+  ul.style.maxHeight="320px";
+  col.appendChild(ul);
+
+  if(state.log.length===0){
+    const li=document.createElement("li");
+    li.className="item";
+    li.innerHTML=`<div class="itemMsg">Nog geen items.</div>`;
     ul.appendChild(li);
   } else {
-    all.slice().reverse().forEach(it=>{
-      const li = document.createElement("li");
-      li.className = "item";
-      const tag = it.type === "adjust" ? `<span class="tag adjust">AANPASSING</span>` : `<span class="tag note">NOTITIE</span>`;
-      const msg = it.type === "adjust"
-        ? `<b>${it.needle}</b> ${it.dir} ${it.step}${it.note ? ` — ${escapeHtml(it.note)}`:""}`
-        : `${escapeHtml(it.text || "")}`;
-      li.innerHTML = `
+    state.log.slice().reverse().forEach(it=>{
+      const li=document.createElement("li");
+      li.className="item";
+      const tag = it.type==="adjust" ? `<span class="pill2 adjust">AANPASSING</span>` : `<span class="pill2 note">NOTITIE</span>`;
+      const msg = it.type==="adjust"
+        ? `<b>${it.needle}</b> ${it.dir} ${it.step}${it.note?` — ${escapeHtml(it.note)}`:""}`
+        : escapeHtml(it.text||"");
+      li.innerHTML=`
         <div class="itemTop">
           <div>${tag}</div>
           <div class="itemMeta">${escapeHtml(it.t)}</div>
@@ -925,259 +745,113 @@ function renderLogFull(){
       ul.appendChild(li);
     });
   }
-
-  const btns = document.createElement("div");
-  btns.className = "btnRow";
-  btns.style.marginTop = "12px";
-  btns.innerHTML = `
-    <button class="btnNext" id="logBtnAdd">+ Log aanpassing</button>
-    <button class="btnWarn" id="logBtnUndo">Maak herstel-lijst</button>
-    <button class="btnGhost" id="logBtnCopy">Kopieer log</button>
-    <button class="btnGhost" id="logBtnBaseline">Baseline vastzetten</button>
-  `;
-  row.appendChild(btns);
-
-  // summary
-  const sum = computeNetAdjustmentsSinceBaseline();
-  $("restoreSummaryText").textContent =
-    `Netto sinds baseline: IDLE ${sum.IDLE.pretty}, LSN ${sum.LSN.pretty}, HSN ${sum.HSN.pretty}. ` +
-    `(+ = CW, - = CCW).`;
-
-  $("logBtnAdd").onclick = ()=> openQuickLog();
-  $("logBtnUndo").onclick = ()=> openUndoList();
-  $("logBtnCopy").onclick = copyLog;
-  $("logBtnBaseline").onclick = ()=> setBaseline();
 }
 
 function renderSettings(){
-  $("stepSmallTitle").textContent = "Instellingen";
-  $("stepHeadline").textContent = "Maak je startpunt slim en veilig.";
+  $("stepTitle").textContent="Instellingen";
+  $("stepHeadline").textContent="Baseline = jouw originele setting.";
   $("stepHint").textContent =
-    "Zet een baseline als je op originele/fabriekssettings staat. Dan kun je altijd terug. Je log blijft op je telefoon (offline).";
+    "Zet baseline als je op fabrieksinstellingen staat. Daarna kun je altijd terug via Herstel-lijst.\n" +
+    "Je kunt ook een notitie opslaan (motor/brandstof/weer).";
 
-  $("barFill").style.width = "100%";
-  $("barText").textContent = "Setup";
-  $("contextBoxes").style.display = "none";
+  const col=$("choiceCol");
+  col.innerHTML="";
 
-  const row = $("answerRow");
-  row.innerHTML = "";
+  const base=document.createElement("button");
+  base.className="choice";
+  base.innerHTML=`<span class="tag safe">BASELINE</span> Baseline vastzetten <small>Huidig: ${escapeHtml(state.baselineLabel)}</small>`;
+  base.onclick=setBaseline;
+  col.appendChild(base);
 
-  const box = document.createElement("div");
-  box.className = "panel";
-  box.innerHTML = `
-    <h3>Baseline</h3>
-    <div class="hint"><b>Huidig:</b> <span id="baselineLabel"></span></div>
-    <div class="smallHelp">Baseline is het punt waar “terug naar origineel” op gebaseerd wordt.</div>
-    <div class="btnRow" style="margin-top:10px;">
-      <button class="btnNext" id="setBaselineBtn">Baseline vastzetten</button>
-      <button class="btnGhost" id="goLogBtn">Ga naar Log & herstel</button>
-    </div>
-  `;
-  row.appendChild(box);
-
-  const box2 = document.createElement("div");
-  box2.className = "panel";
-  box2.style.marginTop = "12px";
-  box2.innerHTML = `
-    <h3>Notities (optioneel)</h3>
-    <label>Motor/auto notitie</label>
-    <input type="text" id="carLabel" placeholder="bijv. KE21SP • 25% nitro • 16°C buiten" />
-    <div class="smallHelp">Deze notitie is alleen voor jezelf in de app.</div>
-    <div class="btnRow" style="margin-top:10px;">
-      <button class="btnNext" id="saveCarLabelBtn">Opslaan</button>
-      <button class="btnGhost" id="quickLogBtn2">+ Log aanpassing</button>
-    </div>
-  `;
-  row.appendChild(box2);
-
-  const danger = document.createElement("div");
-  danger.className = "panel";
-  danger.style.marginTop = "12px";
-  danger.innerHTML = `
-    <h3>Reset</h3>
-    <div class="hint">Wist wizard + log + baseline (niet omkeerbaar).</div>
-    <div class="btnRow" style="margin-top:10px;">
-      <button class="btnNo" id="clearAllBtn">Alles wissen</button>
-    </div>
-  `;
-  row.appendChild(danger);
-
-  $("baselineLabel").textContent = state.baselineLabel;
-  $("setBaselineBtn").onclick = ()=> setBaseline();
-  $("goLogBtn").onclick = ()=> setView("log");
-  $("carLabel").value = state.carLabel || "";
-  $("saveCarLabelBtn").onclick = ()=>{
-    state.carLabel = $("carLabel").value.trim();
-    save();
-    alert("Opgeslagen.");
-  };
-  $("quickLogBtn2").onclick = ()=> openQuickLog();
-  $("clearAllBtn").onclick = ()=> clearAll(true);
-}
-
-/* ---------------------------
-   Undo list generation
-----------------------------*/
-function computeNetAdjustmentsSinceBaseline(){
-  const sum = { IDLE:0, LSN:0, HSN:0 };
-  const slice = state.log.slice(state.baselineIndex);
-  slice.forEach(it=>{
-    if(it.type !== "adjust") return;
-    if(sum[it.needle] === undefined) return;
-    sum[it.needle] += it.delta;
-  });
-  return {
-    IDLE: { val: sum.IDLE, pretty: prettyTurns(sum.IDLE) },
-    LSN:  { val: sum.LSN,  pretty: prettyTurns(sum.LSN)  },
-    HSN:  { val: sum.HSN,  pretty: prettyTurns(sum.HSN)  },
-  };
-}
-
-function prettyTurns(val){
-  // val is in turns, where 0.125 = 1/8, etc.
-  const sign = val > 0 ? "+" : val < 0 ? "-" : "";
-  return `${sign}${numToPretty(Math.abs(val))} slag`;
-}
-
-function openUndoList(){
-  const start = state.baselineIndex ?? 0;
-  const slice = state.log.slice(start).filter(x=>x.type==="adjust");
-  const hint = $("undoHint");
-
-  if(slice.length === 0){
-    hint.textContent = "Geen aanpassingen sinds baseline. Je staat al op origineel (volgens het log).";
-  } else {
-    hint.textContent =
-      "Draai deze stappen terug (in omgekeerde volgorde). Dit brengt je terug naar de baseline.";
-  }
-
-  const ul = $("undoList");
-  ul.innerHTML = "";
-
-  slice.slice().reverse().forEach(it=>{
-    const oppositeDir = it.dir === "CW" ? "CCW" : "CW";
-    const li = document.createElement("li");
-    li.className = "item";
-    li.innerHTML = `
-      <div class="itemTop">
-        <div><span class="tag adjust">TERUGDRAAIEN</span></div>
-        <div class="itemMeta">Oorspronkelijk: ${escapeHtml(it.needle)} ${escapeHtml(it.dir)} ${escapeHtml(it.step)}</div>
+  const note=document.createElement("div");
+  note.className="item";
+  note.innerHTML=`
+    <div class="itemMsg">
+      <b>Notitie (optioneel)</b><br>
+      <input id="carLabelInput" type="text" placeholder="bijv. KE21SP • 25% nitro • 16°C"
+        style="margin-top:8px; width:100%; padding:12px; border-radius:12px; border:1px solid var(--border); background: rgba(0,0,0,.25); color: var(--text); font-size:15px;">
+      <div class="miniRow" style="margin-top:10px;">
+        <button class="btnNext" id="saveNoteBtn">Opslaan</button>
+        <button class="btnGhost" id="goWizardBtn">Terug naar wizard</button>
       </div>
-      <div class="itemMsg"><b>${escapeHtml(it.needle)}</b> ${oppositeDir} ${escapeHtml(it.step)} ${it.note ? `— ${escapeHtml(it.note)}`:""}</div>
-    `;
-    ul.appendChild(li);
-  });
+    </div>
+  `;
+  col.appendChild(note);
 
-  $("modalUndo").style.display = "block";
+  setTimeout(()=>{
+    $("carLabelInput").value = state.carLabel || "";
+    $("saveNoteBtn").onclick = ()=>{
+      state.carLabel = $("carLabelInput").value.trim();
+      save();
+      alert("Opgeslagen.");
+    };
+    $("goWizardBtn").onclick = ()=> setView("wizard");
+  },0);
 }
 
-/* ---------------------------
-   Quick log modal
-----------------------------*/
-function openQuickLog(preset=null){
-  if(preset){
-    $("logNeedle").value = preset.needle;
-    $("logDir").value = preset.dir;
-    $("logStep").value = preset.step;
-    $("logNote").value = preset.note || "";
+function renderAll(){
+  renderTabs();
+  if(state.view==="wizard"){
+    renderWizard();
+    renderLogPreview();
+    $("sideCard").style.display="";
+  } else if(state.view==="log"){
+    renderLogView();
+    renderLogPreview();
+    $("sideCard").style.display="none";
   } else {
-    $("logNeedle").value = "LSN";
-    $("logDir").value = "CW";
-    $("logStep").value = "1/8";
-    $("logNote").value = "";
+    renderSettings();
+    renderLogPreview();
+    $("sideCard").style.display="none";
   }
-  $("modal").style.display = "block";
 }
 
-function closeQuickLog(){
-  $("modal").style.display = "none";
+/* =========================
+   Manual log modal
+========================= */
+function openQuickLog(){
+  $("logNeedle").value="LSN";
+  $("logDir").value="CW";
+  $("logStep").value="1/8";
+  $("logNote").value="";
+  $("modal").style.display="block";
 }
+function closeQuickLog(){ $("modal").style.display="none"; }
 
-/* ---------------------------
-   Copy log
-----------------------------*/
-function copyLog(){
-  const lines = [];
-  lines.push("RC Nitro Tuning Log");
-  lines.push("==================");
-  lines.push(`Baseline: ${state.baselineLabel}`);
-  if(state.carLabel) lines.push(`Notitie: ${state.carLabel}`);
-  lines.push("");
+$("logCancel").onclick = closeQuickLog;
+$("logSave").onclick = ()=>{
+  logAdjustment($("logNeedle").value, $("logDir").value, $("logStep").value, $("logNote").value.trim(), "manual");
+  closeQuickLog();
+  renderAll();
+};
 
-  state.log.forEach(it=>{
-    if(it.type === "adjust"){
-      lines.push(`[AANPASSING] ${it.needle} ${it.dir} ${it.step}` + (it.note ? ` — ${it.note}`:"") + ` (${it.t})`);
-    } else {
-      lines.push(`[NOTITIE] ${it.text} (${it.t})`);
-    }
-  });
+$("modal").addEventListener("click",(e)=>{ if(e.target.id==="modal") closeQuickLog(); });
+$("undoClose").onclick = ()=> $("modalUndo").style.display="none";
+$("modalUndo").addEventListener("click",(e)=>{ if(e.target.id==="modalUndo") $("modalUndo").style.display="none"; });
 
-  lines.push("");
-  const sum = computeNetAdjustmentsSinceBaseline();
-  lines.push(`Netto sinds baseline: IDLE ${sum.IDLE.pretty}, LSN ${sum.LSN.pretty}, HSN ${sum.HSN.pretty} (+=CW, -=CCW)`);
-
-  const text = lines.join("\n");
-
-  navigator.clipboard.writeText(text).then(()=>{
-    alert("Log gekopieerd naar klembord.");
-  }).catch(()=>{
-    prompt("Kopieer handmatig:", text);
-  });
-}
-
-/* ---------------------------
-   Small helpers
-----------------------------*/
-function escapeHtml(s){
-  return String(s).replace(/[&<>"']/g, (c)=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[c]));
-}
-
-/* ---------------------------
-   Wire up events
-----------------------------*/
+/* =========================
+   Buttons + Tabs
+========================= */
 $("tabWizard").onclick = ()=> setView("wizard");
 $("tabLog").onclick = ()=> setView("log");
 $("tabSettings").onclick = ()=> setView("settings");
 
-$("btnBack").onclick = back;
+$("btnBack").onclick = ()=>{
+  if(state.view!=="wizard"){ setView("wizard"); return; }
+  back();
+};
 $("btnRestart").onclick = restartWizard;
-$("btnQuickLog").onclick = ()=> openQuickLog();
+$("btnQuickLog").onclick = openQuickLog;
 
 $("btnCopyLog").onclick = copyLog;
 $("btnUndoList").onclick = openUndoList;
 
-$("logCancel").onclick = closeQuickLog;
-$("logSave").onclick = ()=>{
-  const needle = $("logNeedle").value;
-  const dir = $("logDir").value;
-  const step = $("logStep").value;
-  const note = $("logNote").value.trim();
-  logAdjustment(needle, dir, step, note, "manual");
-  closeQuickLog();
-};
-
-$("undoClose").onclick = ()=> $("modalUndo").style.display = "none";
-
-// close modals by clicking outside (nice on iPhone)
-$("modal").addEventListener("click", (e)=>{ if(e.target.id==="modal") closeQuickLog(); });
-$("modalUndo").addEventListener("click", (e)=>{ if(e.target.id==="modalUndo") $("modalUndo").style.display="none"; });
-
-/* ---------------------------
-   Render loop
-----------------------------*/
-function renderAll(){
-  renderTabs();
-  renderMainCardByView();
-}
-
 load();
 renderAll();
 
-/* Service worker */
+/* SW */
 window.addEventListener("load", () => {
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("./sw.js");
-  }
+  if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js");
 });
 </script>
 </body>
